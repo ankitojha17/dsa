@@ -1,0 +1,31 @@
+
+Example 1:
+
+Input: word1 = "abc", word2 = "bca"
+Output: true
+Explanation: You can attain word2 from word1 in 2 operations.
+Apply Operation 1: "abc" -> "acb"
+Apply Operation 1: "acb" -> "bca"
+Example 2:
+
+Input: word1 = "a", word2 = "aa"
+Output: false
+Explanation: It is impossible to attain word2 from word1, or vice versa, in any number of operations.
+
+class Solution:
+    def closeStrings(self, word1: str, word2: str) -> bool:
+        if set(word1) != set(word2):
+            return False
+        count1 = {}
+        count2 = {}
+        for char in word1:
+            if char in count1:
+                count1[char] += 1
+            else:
+                count1[char] = 1
+        for char in word2:
+            if char in count2:
+                 count2[char] += 1
+            else:
+                 count2[char] = 1
+        return sorted(count1.values()) == sorted(count2.values())
