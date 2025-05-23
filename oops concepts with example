@@ -1,0 +1,284 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyMflSgOINfVDdfOzEyTHPdf",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/ankitojha17/ankitojha17/blob/main/untitled3.ipynb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "vq9M9kairEjw"
+      },
+      "outputs": [],
+      "source": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "oops concepts in python :  inheritance\n"
+      ],
+      "metadata": {
+        "id": "0dxDDFBgrFvK"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "class Person(object):\n",
+        "\n",
+        "\n",
+        "  def __init__(self, name, id):\n",
+        "    self.name = name\n",
+        "    self.id = id\n",
+        "\n",
+        "\n",
+        "  def Display(self):\n",
+        "    print(self.name, self.id)\n",
+        "\n",
+        "\n",
+        "\n",
+        "emp = Person(\"Ankit\", 111)\n",
+        "emp.Display()\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "BToeS5Czs-2p",
+        "outputId": "9b10e43e-79a7-4555-d5d8-a2d1117e823a"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Ankit 111\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "class Person(object):\n",
+        "\n",
+        "    def __init__(self, name, idnumber):\n",
+        "        self.name = name\n",
+        "        self.idnumber = idnumber\n",
+        "\n",
+        "    def display(self):\n",
+        "        print(self.name)\n",
+        "        print(self.idnumber)\n",
+        "\n",
+        "\n",
+        "class Employee(Person):\n",
+        "    def __init__(self, name, idnumber, salary, post):\n",
+        "        self.salary = salary\n",
+        "        self.post = post\n",
+        "\n",
+        "\n",
+        "        Person.__init__(self, name, idnumber)\n",
+        "\n",
+        "a = Employee('Ankit', 886012, 200000, \"Intern\")\n",
+        "\n",
+        "a.display()\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "VLaWjZc4tfeJ",
+        "outputId": "44a96069-1267-4305-831c-c4185603bd2d"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Ankit\n",
+            "886012\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "l_ya9Nj2uGYq"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "multilevel inheritence"
+      ],
+      "metadata": {
+        "id": "FWreIHCKuSC3"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "class Car1(object):\n",
+        "    def __init__(self):\n",
+        "        self.str1 = \"BMW\"\n",
+        "        print(\"Car1\")\n",
+        "\n",
+        "\n",
+        "class Car2(object):\n",
+        "    def __init__(self):\n",
+        "        self.str2 = \"BMW2\"\n",
+        "        print(\"Car2\")\n",
+        "\n",
+        "\n",
+        "class Derived(Car1 , Car2):\n",
+        "    def __init__(self):\n",
+        "        Car1.__init__(self)\n",
+        "        Car2.__init__(self)\n",
+        "        print(\"Derived\")\n",
+        "\n",
+        "    def printStrs(self):\n",
+        "        print(self.str1, self.str2)\n",
+        "\n",
+        "\n",
+        "ob = Derived()\n",
+        "ob.printStrs()\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "W_b-otFkuXNc",
+        "outputId": "cf82ce81-16b8-4f20-ce98-9ef7afeee5b4"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Car1\n",
+            "Car2\n",
+            "Derived\n",
+            "BMW BMW2\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Polymorphism using class methods"
+      ],
+      "metadata": {
+        "id": "xsFdb-i_v9zs"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "class India():\n",
+        "    def capital(self):\n",
+        "        print(\"New Delhi is the capital of India.\")\n",
+        "\n",
+        "    def language(self):\n",
+        "        print(\"Hindi is the most widely spoken language of India.\")\n",
+        "\n",
+        "    def type(self):\n",
+        "        print(\"India is a developing country.\")\n",
+        "\n",
+        "class Bihar():\n",
+        "    def capital(self):\n",
+        "        print(\"Patna  is the capital of Bihar.\")\n",
+        "\n",
+        "    def language(self):\n",
+        "        print(\"Bhojpuri is the primary language of Bihar.\")\n",
+        "\n",
+        "    def type(self):\n",
+        "        print(\"Bihar is culture rich state.\")\n",
+        "\n",
+        "class UP():\n",
+        "    def capital(self):\n",
+        "        print(\"panipath is the capital of UP.\")\n",
+        "\n",
+        "    def language(self):\n",
+        "        print(\"Sanskrit is the main language of UP.\")\n",
+        "\n",
+        "    def type(self):\n",
+        "        print(\"UP is the largest state of india.\")\n",
+        "\n",
+        "obj_ind = India()\n",
+        "obj_Bihar = Bihar()\n",
+        "obj_UP = UP()\n",
+        "for country in (obj_ind, obj_Bihar, obj_UP):\n",
+        "    country.capital()\n",
+        "    country.language()\n",
+        "    country.type()\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "yHVx1rxvwH0l",
+        "outputId": "901fbd07-2d1f-41aa-8743-5744ec10d14a"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "New Delhi is the capital of India.\n",
+            "Hindi is the most widely spoken language of India.\n",
+            "India is a developing country.\n",
+            "Patna  is the capital of Bihar.\n",
+            "Bhojpuri is the primary language of Bihar.\n",
+            "Bihar is culture rich state.\n",
+            "panipath is the capital of UP.\n",
+            "Sanskrit is the main language of UP.\n",
+            "UP is the largest state of india.\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "PN6J7h9SviHE"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
