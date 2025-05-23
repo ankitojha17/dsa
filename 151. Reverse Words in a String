@@ -1,0 +1,32 @@
+Example 1:
+
+Input: s = "the sky is blue"
+Output: "blue is sky the"
+Example 2:
+
+Input: s = "  hello world  "
+Output: "world hello"
+Explanation: Your reversed string should not contain leading or trailing spaces.
+
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        arr = s.split()
+        res = []
+        for i in range(len(arr) -1, -1, -1):
+            res.append(arr[i])
+                    
+        return ' '.join(res)
+
+ 2nd approche:
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        arr = s.split()
+        res = []
+        for i in range(len(arr) -1, -1, -1):
+            res.append(arr[i])
+                    
+        return ' '.join(res)
+
+ 
+        
+        
