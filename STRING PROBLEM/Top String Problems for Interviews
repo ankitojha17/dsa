@@ -1,0 +1,173 @@
+# 1. Longest Substring Without Repeating Characters
+# Sliding window to track unique characters
+
+def lengthOfLongestSubstring(s):
+    seen = set()
+    left = 0
+    max_len = 0
+    for right in range(len(s)):
+        while s[right] in seen:
+            seen.remove(s[left])
+            left += 1
+        seen.add(s[right])
+        max_len = max(max_len, right - left + 1)
+    return max_len
+
+# 2. Group Anagrams
+# Use a dictionary with sorted strings as keys
+
+def groupAnagrams(strs):
+    from collections import defaultdict
+    anagrams = defaultdict(list)
+    for word in strs:
+        key = tuple(sorted(word))
+        anagrams[key].append(word)
+    return list(anagrams.values())
+
+# 3. Longest Palindromic Substring
+# Expand around center approach
+
+def longestPalindrome(s):
+    def expand(l, r):
+        while l >= 0 and r < len(s) and s[l] == s[r]:
+            l -= 1
+            r += 1
+        return s[l+1:r]
+
+    result = ""
+    for i in range(len(s)):
+        odd = expand(i, i)
+        even = expand(i, i+1)
+        result = max(result, odd, even, key=len)
+    return result
+
+# 4. Valid Parentheses
+# Stack to track opening brackets
+
+def isValid(s):
+    stack = []
+    mapping = {')': '(', '}': '{', ']': '['}
+    for char in s:
+        if char in mapping:
+            top = stack.pop() if stack else '#'
+            if mapping[char] != top:
+                return False
+        else:
+            stack.append(char)
+    return not stack
+
+# 5. Decode Ways
+# DP with state: dp[i] = number of ways to decode s[0:i]
+
+def numDecodings(s):
+    if not s or s[0] == '0': return 0
+    dp = [1, 1]
+    for i in range(2, len(s)+1):
+        count = 0
+        if s[i-1] != '0':
+            count += dp[-1]
+        if 10 <= int(s[i-2:i]) <= 26:
+            count += dp[-2]
+        dp.append(count)
+    return dp[-1]
+
+# 6. Find All Anagrams in a String
+# Sliding window with frequency counters
+
+def findAnagrams(s, p):
+    from collections import Counter
+    res = []
+    p_count = Counter(p)
+    s_count = Counter()
+    for i in range(len(s)):
+        s_count[s[i]] += 1
+        if i >= len(p):
+            if s_count[s[i-len(p)]] == 1:
+                del s_count[s[i-len(p)]]
+            else:
+                s_count[s[i-len(p)]] -= 1
+        if s_count == p_count:
+            res.append(i - len(p) + 1)
+    return res
+
+# 7. Roman to Integer
+# Check current and next character to decide add/subtract
+
+def romanToInt(s):
+    roman = {'I': 1, 'V': 5, 'X': 10, 'L': 50,
+             'C': 100, 'D': 500, 'M': 1000}
+    total = 0
+    for i in range(len(s)):
+        if i + 1 < len(s) and roman[s[i]] < roman[s[i+1]]:
+            total -= roman[s[i]]
+        else:
+            total += roman[s[i]]
+    return total
+
+# 8. Remove Duplicate Letters
+# Stack + Greedy with last index lookup
+
+def removeDuplicateLetters(s):
+    last = {c: i for i, c in enumerate(s)}
+    stack = []
+    seen = set()
+    for i, c in enumerate(s):
+        if c in seen:
+            continue
+        while stack and c < stack[-1] and i < last[stack[-1]]:
+            seen.remove(stack.pop())
+        seen.add(c)
+        stack.append(c)
+    return ''.join(stack)
+
+# 9. Basic Calculator II
+# Stack-based eval with +, -, *, /
+
+def calculate(s):
+    s += '+'
+    stack = []
+    num = 0
+    sign = '+'
+    for c in s:
+        if c.isdigit():
+            num = num * 10 + int(c)
+        elif c in '+-*/':
+            if sign == '+':
+                stack.append(num)
+            elif sign == '-':
+                stack.append(-num)
+            elif sign == '*':
+                stack[-1] *= num
+            elif sign == '/':
+                stack[-1] = int(stack[-1] / num)
+            sign = c
+            num = 0
+    return sum(stack)
+
+# 10. Minimum Window Substring
+# Sliding Window + HashMap
+
+def minWindow(s, t):
+    from collections import Counter
+    if not s or not t:
+        return ""
+    t_count = Counter(t)
+    window = {}
+    have, need = 0, len(t_count)
+    res, res_len = [-1, -1], float("inf")
+    l = 0
+    for r in range(len(s)):
+        c = s[r]
+        window[c] = window.get(c, 0) + 1
+        if c in t_count and window[c] == t_count[c]:
+            have += 1
+        while have == need:
+            if (r - l + 1) < res_len:
+                res = [l, r]
+                res_len = r - l + 1
+            window[s[l]] -= 1
+            if s[l] in t_count and window[s[l]] < t_count[s[l]]:
+                have -= 1
+            l += 1
+    l, r = res
+    return s[l:r+1] if res_len != float("inf") else ""
