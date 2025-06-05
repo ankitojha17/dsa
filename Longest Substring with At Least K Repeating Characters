@@ -1,0 +1,32 @@
+
+Example 1:
+
+Input: s = "aaabb", k = 3
+Output: 3
+Explanation: The longest substring is "aaa", as 'a' is repeated 3 times.
+Example 2:
+
+Input: s = "ababbc", k = 2
+Output: 5
+Explanation: The longest substring is "ababb", as 'a' is repeated 2 times and 'b' is repeated 3 times.
+
+ans:-class Solution:
+    def longestSubstring(self, s: str, k: int) -> int:
+        if not s:
+            return 0
+
+        # Count frequencies
+        freq = {}
+        for ch in s:
+            freq[ch] = freq.get(ch, 0) + 1
+
+        # Split by any character that occurs fewer than k times
+        for ch in freq:
+            if freq[ch] < k:
+                # ch is a "bad" char, can't be part of the final answer
+                return max(self.longestSubstring(t, k) for t in s.split(ch))
+        
+        # All characters appear at least k times
+        return len(s)
+
+        
